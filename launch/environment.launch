@@ -40,8 +40,8 @@
         <arg name="enable_ground_truth" default="true"/>
 	<arg name="log_file" default="erlecopter1"/>
 	<include file="$(find mavros)/launch/apm_sitl.launch" >
-		<arg name="fcu_url" value="tcp://127.0.0.1:5760" />
-		<arg name="gcs_url" value="udp://:14550@" /> 
+		<arg name="fcu_url" value="udp://127.0.0.1:14551@" /> 
+		<arg name="gcs_url" value="" /> 
 		<arg name="tgt_system" value="1" />
 		<arg name="tgt_component" value="1" /> 
 	</include> 
@@ -88,6 +88,8 @@
   	</node>	
 	<node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen"/>
 	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" output="screen"/>
+
+	
 </group> 
 
 <group ns="uav2">   
@@ -104,9 +106,9 @@
 	<arg name="enable_logging" default="true"/>
         <arg name="enable_ground_truth" default="true"/>
 	<arg name="log_file" default="erlecopter2"/>
-	 <include file="$(find mavros)/launch/apm_sitl.launch" >
-		<arg name="fcu_url" value="tcp://127.0.0.1:5770" />
-		<arg name="gcs_url" value="udp://:14560@" /> 
+	<include file="$(find mavros)/launch/apm_sitl.launch" >
+		<arg name="fcu_url" value="udp://127.0.0.1:14561@" /> 
+		<arg name="gcs_url" value="" /> 
 		<arg name="tgt_system" value="1" />
 		<arg name="tgt_component" value="1" /> 
 	</include> 
@@ -119,8 +121,8 @@
 
 
   <!-- Initial pose for the drone -->
-  	<arg name="x" default="0.0"/> <!-- [m], positive to the North -->
-  	<arg name="y" default="-1.0"/> <!-- [m], negative to the East -->
+  	<arg name="x" default="1.0"/> <!-- [m], positive to the North -->
+  	<arg name="y" default="0.0"/> <!-- [m], negative to the East -->
   	<arg name="z" default="0.08"/> <!-- [m], positive Up -->
   	<arg name="roll" default="0"/> <!-- [rad] -->
   	<arg name="pitch" default="0"/> <!-- [rad] -->

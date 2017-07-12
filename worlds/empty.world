@@ -112,7 +112,7 @@
     </plugin> 
  
 
-    <plugin name="ardupilot_sitl_gazebo_plugin_2" filename="libardupilot_sitl_gazebo_plugin.so">
+  <plugin name="ardupilot_sitl_gazebo_plugin_2" filename="libardupilot_sitl_gazebo_plugin.so">
     	<UAV_MODEL>uav2/erlecopter</UAV_MODEL>	
 	<PORT_NO>9012</PORT_NO>
 	<PORT_OUT>9013</PORT_OUT>
