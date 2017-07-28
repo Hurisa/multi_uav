@@ -4,11 +4,32 @@
   <version>0.1.1</version>
   <description>multi_uav</description>
 
-  <maintainer email="hs20@hw.ac.uk.co">Hugo Sardinha</maintainer>
-  <author email="hs20@hw.ac.uk.co">Hugo Sardinha</author>
+  <maintainer email="hs20@hw.ac.uk">Hugo Sardinha</maintainer>
+  <author email="hs20@hw.ac.uk">Hugo Sardinha</author>
   <license>BSD</license>
 
+
   <buildtool_depend>catkin</buildtool_depend>
+
+ <build_depend>gazebo_msgs</build_depend>
+
+  <build_depend>gazebo_ros</build_depend>
+  <build_depend>gazebo_ros_control</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>std_msgs</build_depend>
+<build_depend>geometry_msgs</build_depend>
+  <build_depend>tf</build_depend>
+
+  <run_depend>tf</run_depend>
+  <run_depend>gazebo_msgs</run_depend>
+
+  <run_depend>gazebo_ros</run_depend>
+  <run_depend>gazebo_ros_control</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>std_msgs</run_depend>
+<run_depend>geometry_msgs</run_depend>
+
+ 
   <run_depend>catkin</run_depend>
 
 </package>
