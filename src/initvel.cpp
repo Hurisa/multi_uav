@@ -35,6 +35,9 @@ int main(int argc, char **argv)
         //msg.angular.z=5*(2*double(rand())/double(RAND_MAX)-1);
 
         msg.twist.linear.y=double(rand())/double(RAND_MAX);
+
+        msg.header.stamp = ros::Time::now();
+
         publisher.publish(msg);
 
         ROS_INFO_STREAM("Sending random velocity command:"<<" linear_x="<<msg.twist.linear.x<<" linear_y=" <<msg.twist.linear.y);
