@@ -5,6 +5,22 @@
 	<node pkg="ros_erle_takeoff_land" type="ros_erle_takeoff_land" name="main" output="screen"/>
 </group>
 
+<!-- <group ns="uav2">
+	<node pkg="ros_erle_takeoff_land" type="ros_erle_takeoff_land" name="main" output="screen"/>
+</group>
+
+<group ns="uav3">
+	<node pkg="ros_erle_takeoff_land" type="ros_erle_takeoff_land" name="main" output="screen"/>
+</group>
+
+<group ns="uav4">
+	<node pkg="ros_erle_takeoff_land" type="ros_erle_takeoff_land" name="main" output="screen"/>
+</group>
+
+
+<group ns="uav5">
+	<node pkg="ros_erle_takeoff_land" type="ros_erle_takeoff_land" name="main" output="screen"/>
+</group> -->
 
 
 </launch>

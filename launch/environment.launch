@@ -5,7 +5,7 @@
 
   <arg name="simRate" default="nan"/>
   <!-- Enable simulation clock -->
-  <param name="use_sim_time" type="bool" value="true" />
+  <param name="use_sim_time" type="bool" value="false" />
 
   
   <arg name="world_name" default="$(find multi_uav)/worlds/empty.world" />
@@ -45,7 +45,7 @@
 		<arg name="tgt_system" value="1" />
 		<arg name="tgt_component" value="1" /> 
 	</include> 
-  	<arg name="name" default="erlecopter1"/>
+  	<arg name="name" default="$(arg namespace)"/>
   	<arg name="model" default="$(find multi_uav)/urdf/erlecopter_base.xacro"/>
   	<arg name="tf_prefix" default="$(arg namespace)"/>
   	<arg name="debug" default="true"/>
@@ -54,12 +54,12 @@
 
 
   <!-- Initial pose for the drone -->
-  	<arg name="x" default="0.0"/> <!-- [m], positive to the North -->
-  	<arg name="y" default="0.0"/> <!-- [m], negative to the East -->
+  	<arg name="x" default="-3.0"/> <!-- [m], positive to the North -->
+  	<arg name="y" default="3.0"/> <!-- [m], negative to the East -->
   	<arg name="z" default="0.08"/> <!-- [m], positive Up -->
   	<arg name="roll" default="0"/> <!-- [rad] -->
   	<arg name="pitch" default="0"/> <!-- [rad] -->
-  	<arg name="yaw" default="0"/> <!-- [rad], negative clockwise -->
+  	<arg name="yaw" default="0.785398"/> <!-- [rad], negative clockwise -->
 
   <!-- send the robot XML to param server -->
   	<param name="robot_description" command="
@@ -91,7 +91,6 @@
 
 	
 </group> 
-
 
 
 

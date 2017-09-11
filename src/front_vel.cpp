@@ -9,9 +9,12 @@
 
 #include <tf/transform_listener.h>
 #include <std_msgs/Float64.h>
-
+#include "std_msgs/Bool.h"
 #include <iostream>
 
+#include <math.h>
+
+#include <sensor_msgs/Imu.h>
 using namespace std;
 
 class Copter //updated z rotation
@@ -27,13 +30,43 @@ public:
     double pitch;
     double yaw;
 
-    double vx;
-    double vy;
+    float vx;
+    float vy;
 
-    void get_yaw(const tf2_msgs::TFMessage& msg);
+    bool moveOn;
+
+
+    void get_yaw(const sensor_msgs::Imu& msg);
+    void rotation_mode(const std_msgs::Bool& msg);
+
 };
 
-void Copter::get_yaw(const tf2_msgs::TFMessage& msg)
+void Copter::rotation_mode(const std_msgs::Bool& msg)
+{
+
+    Copter::moveOn = msg.data;
+
+}
+
+void Copter::get_yaw(const sensor_msgs::Imu& msg)
+{
+
+    Copter::x=msg.orientation.x;
+    Copter::y=msg.orientation.y;
+    Copter::z=msg.orientation.z;
+    Copter::w=msg.orientation.w;
+
+    tf::Quaternion q(Copter::x, Copter::y, Copter::z, Copter::w);
+    tf::Matrix3x3 m(q);
+
+    //double r, p, y;
+    m.getRPY(Copter::roll, Copter::pitch, Copter::yaw);
+
+    //Copter::yaw=y;
+    //ROS_INFO("yaw is: %f", Copter::yaw);
+}
+
+/*void Copter::get_yaw(const tf2_msgs::TFMessage& msg)
 {
 
     Copter::x=msg.transforms[0].transform.rotation.x;
@@ -44,14 +77,12 @@ void Copter::get_yaw(const tf2_msgs::TFMessage& msg)
     tf::Quaternion q(Copter::x, Copter::y, Copter::z, Copter::w);
     tf::Matrix3x3 m(q);
 
-    double r, p, y;
-    m.getRPY(r, p, y);
+    //double r, p, y;
+    m.getRPY(Copter::roll, Copter::pitch, Copter::yaw);
 
-    Copter::yaw=y;
-
-}
-
-
+    //Copter::yaw=y;
+    ROS_INFO("yaw is: %f", Copter::yaw);
+}*/
 
 int main(int argc, char **argv)
 {
@@ -60,36 +91,50 @@ int main(int argc, char **argv)
 
     Copter copter;
 
-    ros::Publisher  vel_pub  = nh.advertise<geometry_msgs::TwistStamped>("/uav/mavros/setpoint_velocity/cmd_vel", 10);
-    ros::Subscriber tf_sub   = nh.subscribe("/tf", 10, &Copter::get_yaw, &copter);
+    ros::Publisher  vel_pub         = nh.advertise<geometry_msgs::TwistStamped>("mavros/setpoint_velocity/cmd_vel", 1);
+    //ros::Subscriber tf_sub          = nh.subscribe("/tf", 10, &Copter::get_yaw, &copter);
+    ros::Subscriber tf_sub          = nh.subscribe("erlecopter/imu", 1, &Copter::get_yaw, &copter);
+    ros::Subscriber rotation_sub    = nh.subscribe("update_yaw", 1, &Copter::rotation_mode, &copter);
 
-    int v(1);
+    double v(0.4);
 
-    ros::Rate rate(10);
+    ros::Rate rate(8);
 
     geometry_msgs::TwistStamped velMsg;
 
+    string ns = ros::this_node::getNamespace();
+
     while (ros::ok())
     {
-    copter.vx = sin(copter.yaw)*v;
-    copter.vy = cos(copter.yaw)*v;
+        copter.vx = sin(copter.yaw)*v;
+        copter.vy = cos(copter.yaw)*v;
 
+        velMsg.twist.linear.x=-copter.vx;
+        velMsg.twist.linear.y=copter.vy;
+        //velMsg.header.stamp = ros::Time::now();
+        velMsg.header.frame_id="world";
 
+        if(copter.moveOn)
+        {
+            cout<<ns<<" Moving on"<<endl;
+            //cout<<" Moving on y "<<copter.vy<<endl;
+            //cout<<" Moving on x "<<copter.vx<<endl;
+            velMsg.twist.linear.x=0;
+            velMsg.twist.linear.y=0;
+            velMsg.twist.linear.z=0;
+            vel_pub.publish(velMsg);
 
-    velMsg.twist.linear.x=-copter.vx;
-    velMsg.twist.linear.y=copter.vy;
-    velMsg.header.stamp = ros::Time::now();
-    velMsg.header.frame_id="world";
-
-    vel_pub.publish(velMsg);
-
-    ros::spinOnce();
-    rate.sleep();
-
+        }
+        else
+        {
+            cout<<ns<<" rotating"<<endl;
+            velMsg.twist.linear.x=0;
+            velMsg.twist.linear.y=0;
+            velMsg.twist.linear.z=0;
+            vel_pub.publish(velMsg);
+             ros::spinOnce();
+        }
+        ros::spinOnce();
+       rate.sleep();
     }
-
-
-
-
-
 }

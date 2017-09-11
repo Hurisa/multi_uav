@@ -1,0 +1,16 @@
+<?xml version='1.0'?>
+<launch>
+
+<group ns="uav">
+	<node pkg="multi_uav" type="front_vel" 		name="front_vel" 	output="screen"/> 
+	<node pkg="multi_uav" type="control_yaw" 	name="control_yaw" 	output="screen"/>
+	
+</group>
+
+ <!--<group ns="uav2">
+	<node pkg="multi_uav" type="front_vel" 		name="front_vel" 	output="screen"/>
+	<node pkg="multi_uav" type="control_yaw" 	name="control_yaw" 	output="screen"/>
+	
+</group> -->
+
+</launch>
