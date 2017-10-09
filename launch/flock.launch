@@ -5,7 +5,7 @@
 	<node pkg="multi_uav" type="linearFlock" 			name="linearFlock" 		output="screen"/>
 </group>
 
-<!--
+
  <group ns="uav2">
 	<node pkg="multi_uav" type="linearFlock" 			name="linearFlock" 		output="screen"/>
 </group> 
@@ -22,5 +22,5 @@
  <group ns="uav5">
 	<node pkg="multi_uav" type="linearFlock" 			name="linearFlock" 		output="screen"/>
 </group>
--->
+
 </launch>

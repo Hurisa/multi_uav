@@ -110,7 +110,7 @@
 	<PORT_NO>9002</PORT_NO>
 	<PORT_OUT>9003</PORT_OUT>
     </plugin> 
- <!--
+
     <plugin name="ardupilot_sitl_gazebo_plugin_2" filename="libardupilot_sitl_gazebo_plugin.so">
       <UAV_MODEL>uav2/erlecopter</UAV_MODEL> 
   <PORT_NO>9012</PORT_NO>
@@ -133,4 +133,7 @@
             <plugin name="ardupilot_sitl_gazebo_plugin_5"
 filename="libardupilot_sitl_gazebo_plugin.so">
 <UAV_MODEL>uav5/erlecopter</UAV_MODEL>    <PORT_NO>9042</PORT_NO>
-<PORT_OUT>9043</PORT_OUT>     </plugin>  -->   </world>  </sdf>
+<PORT_OUT>9043</PORT_OUT>     </plugin>  
+
+  </world>  
+</sdf>
