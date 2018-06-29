@@ -1,0 +1,27 @@
+<?xml version='1.0'?>
+<launch>  
+
+ <!-- start world -->
+
+  <arg name="simRate" default="nan"/>
+  <!-- Enable simulation clock -->
+  <param name="use_sim_time" type="bool" value="false" />
+
+  
+  <arg name="world_name" default="$(find multi_uav)/worlds/empty.world" />
+  <arg name="gui" value="true" />
+  <arg name="headless" value="false" /> 
+
+  <env name="GAZEBO_MODEL_PATH" value="$(find ardupilot_sitl_gazebo_plugin)/meshes/meshes_sensors"/>
+
+<!--<env name="GAZEBO_MODEL_PATH" value="$(find drcsim_model_resources)/gazebo_models/environments:$(find ardupilot_sitl_gazebo_plugin)/meshes/meshes_sensors:$(find ardupilot_sitl_gazebo_plugin)/meshes/meshes_outdoor:$(find ardupilot_sitl_gazebo_plugin)/meshes/meshes_warehouse"/>-->
+
+  <include file="$(find multi_uav)/launch/empty_world.launch">
+    <arg name="paused" value="true"/>  
+    <arg name="headless" value="$(arg headless)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="world_name" value="$(arg world_name)"/>
+  </include>
+
+
+</launch>

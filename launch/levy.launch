@@ -2,7 +2,7 @@
 <launch>
 
 <group ns="uav">
-	<node pkg="ros_erle_takeoff_land" type="ros_erle_takeoff_land" name="takeoff" output="screen"/>
+	<node pkg="multi_uav" type="levy" name="levy" output="screen"/>
 </group>
 
 <!--<group ns="uav2">

@@ -20,6 +20,7 @@
 -->
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:property name="namespace" value="erlecopter" />
   <!-- Macro to add logging to a bag file. -->
   <xacro:macro name="bag_plugin_macro"
     params="namespace bag_file rotor_velocity_slowdown_sim">

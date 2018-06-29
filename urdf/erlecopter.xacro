@@ -164,8 +164,8 @@
     ray_count="1"
     sensor_mesh="lidar_lite_v2_withRay/meshes/lidar_lite_v2_withRay.dae">
     <origin xyz="0.13 0.0 0.02" rpy="0 0 0"/>
-  </xacro:sonar_sensor>
--->
+  </xacro:sonar_sensor> -->
+
 
   <xacro:include filename="$(find ardupilot_sitl_gazebo_plugin)/urdf/sensors/lidar_sensor.urdf.xacro" />
    <xacro:lidar_sensor

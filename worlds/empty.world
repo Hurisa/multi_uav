@@ -37,35 +37,73 @@
       <max_step_size>0.001</max_step_size>
     </physics>
 
-    <!-- Light Source -->
-    <light type="directional" name="sun">
-      <cast_shadows>false</cast_shadows>
-      <pose>0 0 100 0 0 0</pose>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose frame=''>0 0 10 0 -0 0</pose>
       <diffuse>0.8 0.8 0.8 1</diffuse>
-      <specular>0.9 0.9 0.9 1</specular>
+      <specular>0.2 0.2 0.2 1</specular>
       <attenuation>
         <range>1000</range>
         <constant>0.9</constant>
         <linear>0.01</linear>
         <quadratic>0.001</quadratic>
       </attenuation>
-      <!--<direction>0.2 0.2 -0.9</direction>-->
-      <!-- Vertical direction, for easier position debug -->
-      <direction>0 0 -1</direction>
+      <direction>-0.5 0.1 -0.9</direction>
     </light>
-
-
-    <include>
-      <uri>model://ground_plane</uri>
-    </include>
-
-
-<!--
-    <include>
+    
+    
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+  <!--   <include>
       <uri>model://fast_food</uri>
         <pose>0 -8 0 0 -0 3.14</pose>
     </include>
-    <include>
+   <include>
       <uri>model://house_2</uri>
         <pose>-9 0 0 0 -0 -1.5707</pose>
     </include>
@@ -105,13 +143,13 @@
     <!-- TODO: TRANSFORM IT INTO A VARIABLE DEFINED IN THE .launch FILE
          OR ELSE WE WILL ALWAYS FORGET IT IS HERE !!! -->
 
-    <plugin name="ardupilot_sitl_gazebo_plugin_1" filename="libardupilot_sitl_gazebo_plugin.so">
+<plugin name="ardupilot_sitl_gazebo_plugin_1" filename="libardupilot_sitl_gazebo_plugin.so">
     	<UAV_MODEL>uav/erlecopter</UAV_MODEL>	
 	<PORT_NO>9002</PORT_NO>
 	<PORT_OUT>9003</PORT_OUT>
     </plugin> 
 
-    <plugin name="ardupilot_sitl_gazebo_plugin_2" filename="libardupilot_sitl_gazebo_plugin.so">
+   <!--    <plugin name="ardupilot_sitl_gazebo_plugin_2" filename="libardupilot_sitl_gazebo_plugin.so">
       <UAV_MODEL>uav2/erlecopter</UAV_MODEL> 
   <PORT_NO>9012</PORT_NO>
   <PORT_OUT>9013</PORT_OUT>
@@ -133,7 +171,7 @@
             <plugin name="ardupilot_sitl_gazebo_plugin_5"
 filename="libardupilot_sitl_gazebo_plugin.so">
 <UAV_MODEL>uav5/erlecopter</UAV_MODEL>    <PORT_NO>9042</PORT_NO>
-<PORT_OUT>9043</PORT_OUT>     </plugin>  
+<PORT_OUT>9043</PORT_OUT>     </plugin>  -->
 
   </world>  
 </sdf>

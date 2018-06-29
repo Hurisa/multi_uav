@@ -5,9 +5,7 @@
 
   <arg name="simRate" default="nan"/>
   <!-- Enable simulation clock -->
-  <param name="use_sim_time" type="bool" value="false" />
-
-  
+  <param name="use_sim_time" type="bool" value="false" />  
   <arg name="world_name" default="$(find multi_uav)/worlds/empty.world" />
   <arg name="gui" value="true" />
   <arg name="headless" value="false" /> 
@@ -16,14 +14,14 @@
 
 <!--<env name="GAZEBO_MODEL_PATH" value="$(find drcsim_model_resources)/gazebo_models/environments:$(find ardupilot_sitl_gazebo_plugin)/meshes/meshes_sensors:$(find ardupilot_sitl_gazebo_plugin)/meshes/meshes_outdoor:$(find ardupilot_sitl_gazebo_plugin)/meshes/meshes_warehouse"/>
 -->
-  
   <include file="$(find multi_uav)/launch/empty_world.launch">
-    <arg name="paused" value="true"/>  
+    <arg name="paused" value="false"/>  
     <arg name="headless" value="$(arg headless)"/>
     <arg name="gui" value="$(arg gui)"/>
     <arg name="world_name" value="$(arg world_name)"/>
   </include>
 
+  
 
 <group ns="uav">   
 	<!-- <arg name="ns" default="iris" />
@@ -37,7 +35,7 @@
 
 	<arg name="namespace" value="uav"/>	
 	<arg name="enable_logging" default="true"/>
-        <arg name="enable_ground_truth" default="true"/>
+    <arg name="enable_ground_truth" default="true"/>
 	<arg name="log_file" default="erlecopter1"/>
 	<include file="$(find mavros)/launch/apm_sitl.launch" >
 		<arg name="fcu_url" value="udp://127.0.0.1:14551@" /> 
